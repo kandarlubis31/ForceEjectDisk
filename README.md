@@ -7,6 +7,8 @@ holds it. Available as a single EXE on the
 
 [![Build EXE](https://github.com/kandarlubis31/ForceEjectDisk/actions/workflows/build.yml/badge.svg)](https://github.com/kandarlubis31/ForceEjectDisk/actions/workflows/build.yml)
 
+![Tampilan Force Eject Disk](docs/screenshot.png)
+
 ### English
 
 Unlike Windows' own "Safely Remove Hardware", this tool tells you **which app**
