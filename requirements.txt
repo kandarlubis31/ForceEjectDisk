@@ -1,0 +1,5 @@
+# Force Eject Disk tidak butuh dependensi runtime.
+# Semua yang dipakai cuma stdlib Python: ctypes + tkinter.
+#
+# Kalau mau build EXE-nya sendiri, yang perlu dipasang hanya PyInstaller:
+#     python -m pip install pyinstaller
