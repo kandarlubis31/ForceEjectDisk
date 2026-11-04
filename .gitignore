@@ -3,3 +3,15 @@ __pycache__/
 build/
 dist/
 *.spec.bak
+
+# --- Dokumen internal agent: JANGAN di-commit ke repo publik ---
+# CONTEXT.md, AGENTS.md, PRD, dan ADR memuat rencana serta keputusan internal.
+CONTEXT.md
+AGENTS.md
+AGENT.md
+CLAUDE.md
+GEMINI.md
+PRD.md
+prd.md
+docs/adr/
+.cursorrules
