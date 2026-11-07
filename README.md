@@ -191,7 +191,7 @@ Catatan:
 ## Bantuan di dalam aplikasi
 
 Menu **Bantuan** (atau tombol **Bantuan (F1)**) berisi: **Cara pakai**, **Cara
-kerja & batasan**, **Buka file log**, **Buka folder log**, dan **Tentang** (versi,
+kerja & batasan**,**Buka file log**,**Buka folder log**, dan**Tentang** (versi,
 penulis, lisensi). Isinya sama dengan dokumentasi di README ini, tapi bisa dibaca
 tanpa keluar dari aplikasi.
 
@@ -236,7 +236,7 @@ Win32), `tray_icon.py` (ikon system tray pakai ctypes, tanpa dependensi eksterna
    Handle yang tidak punya path file - misalnya aplikasi yang memegang langsung
    `\\.\X:` atau `\\.\PhysicalDriveN`, penyebab umum `FSCTL_LOCK_VOLUME` gagal -
    dikenali lewat `IOCTL_STORAGE_GET_DEVICE_NUMBER` dan ditandai
-   "(handle langsung ke volume ...)".
+   "(handle langsung ke volume...)".
 2. **Lepaskan drive** — salah satu dari:
    - *mode aman*: tiap handle yang menunjuk ke drive itu ditutup di proses
      pemiliknya lewat `DuplicateHandle(..., DUPLICATE_CLOSE_SOURCE)`, setelah
