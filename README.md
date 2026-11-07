@@ -20,7 +20,7 @@ drive (the same trick as Sysinternals `handle.exe -c`), after flushing file
 buffers. **The app stays open**: your editor keeps running, it just loses access
 to that drive. Nothing is killed.
 - **Force mode** — terminates the processes that hold the drive (core Windows
- processes are never touched). Unsaved data in those apps can be lost.
+  processes are never touched). Unsaved data in those apps can be lost.
 
 Then it locks → dismounts → asks the Plug and Play manager to remove the device
 (`CM_Request_Device_EjectW`), exactly like "Safely Remove Hardware" does.
@@ -66,8 +66,8 @@ mode **aman** (aplikasi tetap terbuka) dan mode **paksa** (aplikasi ditutup).
 2. Klik **Refresh**, pilih drive di daftar.
 3. Klik **Cek Pengunci** kalau mau tahu dulu aplikasi mana yang menahan.
 4. Pilih cara melepas di panel **Cara melepas drive**, lalu klik **Eject aman** /
- **Eject paksa**. Kalau ada aplikasi pengunci, muncul konfirmasi berisi daftar
- aplikasi itu.
+   **Eject paksa**. Kalau ada aplikasi pengunci, muncul konfirmasi berisi daftar
+   aplikasi itu.
 5. Kalau log bilang "berhasil di-eject", drive sudah aman dicabut.
 
 Kolom **Tipe** di daftar drive menuliskan bus-nya: **USB / bisa dicabut** atau
@@ -91,13 +91,13 @@ ke drive itu (cara kerjanya sama dengan `handle.exe -c` dari Sysinternals).
 Alurnya:
 
 1. Isi buffer file di-flush dulu (`FlushFileBuffers`) supaya tulisan yang belum
- sampai ke disk tidak hilang.
+   sampai ke disk tidak hilang.
 2. Handle-handle yang menunjuk ke drive itu ditutup di proses pemiliknya.
 3. Aplikasi tetap jalan seperti biasa — yang hilang hanya aksesnya ke drive
- tersebut. Kalau aplikasi itu masih butuh drive-nya, dia akan error sendiri
- atau membuka ulang file (drive sudah lepas, jadi gagal).
+   tersebut. Kalau aplikasi itu masih butuh drive-nya, dia akan error sendiri
+   atau membuka ulang file (drive sudah lepas, jadi gagal).
 4. Log merinci per aplikasi: berapa handle yang dilepas, berapa file di-flush,
- dan file apa saja yang tadi dipegang.
+   dan file apa saja yang tadi dipegang.
 
 **Simpan dulu (Ctrl+S)** sebelum klik. Tool ini tidak bisa menyimpan dokumen
 milik aplikasi lain; flush hanya menjamin data yang sudah "diserahkan" aplikasi
@@ -124,15 +124,15 @@ Hardware" bawaan Windows.
 Ikon aplikasi selalu aktif di system tray selama aplikasi berjalan.
 
 - **Klik kanan ikon tray** → menu: `Buka Force Eject Disk`, `Eject aman C:`,
- `Eject aman D:`, … (satu entri per drive yang terpasang, mengikuti mode yang
- sedang dipilih di jendela), `Buka file log`, `Keluar`.
+  `Eject aman D:`, … (satu entri per drive yang terpasang, mengikuti mode yang
+  sedang dipilih di jendela), `Buka file log`, `Keluar`.
 - **Klik kiri ikon tray** → munculkan jendela lagi.
 - Klik entri eject di menu tray = sama dengan menekan tombol Eject pada drive itu:
- jendela muncul, konfirmasi tetap ditampilkan, lalu prosesnya jalan dan hasilnya
- muncul sebagai notifikasi balon kalau jendela sedang disembunyikan.
+  jendela muncul, konfirmasi tetap ditampilkan, lalu prosesnya jalan dan hasilnya
+  muncul sebagai notifikasi balon kalau jendela sedang disembunyikan.
 - Tombol X di jendela **tidak menutup aplikasi** selama centang
- "Tutup jendela -> tray" aktif; aplikasi tetap jalan di tray. Hilangkan
- centangnya kalau mau tombol X langsung keluar, atau pakai `Keluar` di menu tray.
+  "Tutup jendela -> tray" aktif; aplikasi tetap jalan di tray. Hilangkan
+  centangnya kalau mau tombol X langsung keluar, atau pakai `Keluar` di menu tray.
 
 ### Ikon
 
@@ -153,13 +153,13 @@ di bagian atas file. Ukuran yang dibuat: 16, 24, 32, 48, 64, 128, 256 piksel.
 Kalau setelah eject drive USB-nya bersuara berulang (spin-up/spin-down):
 
 1. **Cabut kabel USB-nya** (atau matikan enclosure-nya), tunggu ~10 detik, lalu
- colok lagi. Itu me-reset jembatan USB-SATA-nya dan biasanya suara berulangnya
- langsung berhenti.
+   colok lagi. Itu me-reset jembatan USB-SATA-nya dan biasanya suara berulangnya
+   langsung berhenti.
 2. Jangan klik **Eject** berulang-ulang sambil drive-nya bersuara — itu
- menambah siklus spin down/up.
+   menambah siklus spin down/up.
 3. Kalau suaranya **mekanis/dek-tik keras dan datar** (bukan berputar), itu gejala
- drive mau rusak: hentikan pemakaian, salin dulu data pentingnya, dan jangan
- di-eject berulang.
+   drive mau rusak: hentikan pemakaian, salin dulu data pentingnya, dan jangan
+   di-eject berulang.
 
 Data tetap aman pada kasus ini: tool tidak pernah menulis ke drive, dan sebelum
 dismount isi buffer file sudah di-flush.
@@ -178,15 +178,15 @@ Jadi bisa dicek setelah aplikasi ditutup, atau saat eject gagal. Klik
 
 Catatan:
 - HDD eksternal lewat USB sering terdeteksi sebagai tipe **"Fixed / eksternal"**,
- bukan "Removable" — itu normal, tetap bisa di-eject.
+  bukan "Removable" — itu normal, tetap bisa di-eject.
 - Lebih membingungkan lagi: enclosure USB modern (UASP) tampil sebagai
- **"SCSI Disk Device"** dan tidak muncul sebagai `USBSTOR` sama sekali. Karena
- itu tool ini menentukan bus lewat **devnode induk disk-nya** (kalau induknya
- device `USB\...` berarti eksternal), bukan dari nama atau kelas device-nya.
+  **"SCSI Disk Device"** dan tidak muncul sebagai `USBSTOR` sama sekali. Karena
+  itu tool ini menentukan bus lewat **devnode induk disk-nya** (kalau induknya
+  device `USB\...` berarti eksternal), bukan dari nama atau kelas device-nya.
 - Proses sistem (System, csrss, lsass, svchost, explorer, dll.) tidak pernah
- ditutup paksa oleh tool ini.
+  ditutup paksa oleh tool ini.
 - Kalau log berakhir "MASIH terpasang", jalankan sebagai Administrator, atau
- tutup manual aplikasi yang disebut di log.
+  tutup manual aplikasi yang disebut di log.
 
 ## Bantuan di dalam aplikasi
 
@@ -227,44 +227,44 @@ Win32), `tray_icon.py` (ikon system tray pakai ctypes, tanpa dependensi eksterna
 ## Bagaimana cara kerjanya
 
 1. **Cari pengunci** — seluruh handle sistem dibaca via
- `NtQuerySystemInformation(SystemExtendedHandleInformation)`, tiap handle
- diduplikasi ke proses kita, difilter dengan `GetFileType` (handle pipe/device
- bisa menggantungkan pemanggilan berikutnya), lalu path-nya dibaca dengan
- `GetFinalPathNameByHandleW`. Semua proses yang punya file di drive target
- dilaporkan. (Restart Manager tidak dipakai: pendaftaran direktori tidak
- melaporkan file yang sedang terbuka.)
- Handle yang tidak punya path file - misalnya aplikasi yang memegang langsung
- `\\.\X:` atau `\\.\PhysicalDriveN`, penyebab umum `FSCTL_LOCK_VOLUME` gagal -
- dikenali lewat `IOCTL_STORAGE_GET_DEVICE_NUMBER` dan ditandai
- "(handle langsung ke volume...)".
+   `NtQuerySystemInformation(SystemExtendedHandleInformation)`, tiap handle
+   diduplikasi ke proses kita, difilter dengan `GetFileType` (handle pipe/device
+   bisa menggantungkan pemanggilan berikutnya), lalu path-nya dibaca dengan
+   `GetFinalPathNameByHandleW`. Semua proses yang punya file di drive target
+   dilaporkan. (Restart Manager tidak dipakai: pendaftaran direktori tidak
+   melaporkan file yang sedang terbuka.)
+   Handle yang tidak punya path file - misalnya aplikasi yang memegang langsung
+   `\\.\X:` atau `\\.\PhysicalDriveN`, penyebab umum `FSCTL_LOCK_VOLUME` gagal -
+   dikenali lewat `IOCTL_STORAGE_GET_DEVICE_NUMBER` dan ditandai
+   "(handle langsung ke volume...)".
 2. **Lepaskan drive** — salah satu dari:
- - *mode aman*: tiap handle yang menunjuk ke drive itu ditutup di proses
- pemiliknya lewat `DuplicateHandle(..., DUPLICATE_CLOSE_SOURCE)`, setelah
- `FlushFileBuffers`. Prosesnya tidak dibunuh; setelah itu drive dipindai
- ulang untuk melihat siapa yang masih menahan.
- - *mode paksa*: aplikasi pengunci dihentikan dengan `TerminateProcess`
- (proses sistem dikecualikan).
+   - *mode aman*: tiap handle yang menunjuk ke drive itu ditutup di proses
+     pemiliknya lewat `DuplicateHandle(..., DUPLICATE_CLOSE_SOURCE)`, setelah
+     `FlushFileBuffers`. Prosesnya tidak dibunuh; setelah itu drive dipindai
+     ulang untuk melihat siapa yang masih menahan.
+   - *mode paksa*: aplikasi pengunci dihentikan dengan `TerminateProcess`
+     (proses sistem dikecualikan).
 3. **Eject volume** — buka `\\.\X:`, `IOCTL_STORAGE_MEDIA_REMOVAL` (izinkan
- pelepasan), `FSCTL_LOCK_VOLUME`, `FSCTL_DISMOUNT_VOLUME`.
- `IOCTL_STORAGE_EJECT_MEDIA` hanya dikirim kalau diminta lewat centang
- "Kirim perintah eject media ke hardware".
+   pelepasan), `FSCTL_LOCK_VOLUME`, `FSCTL_DISMOUNT_VOLUME`.
+   `IOCTL_STORAGE_EJECT_MEDIA` hanya dikirim kalau diminta lewat centang
+   "Kirim perintah eject media ke hardware".
 4. **Lepas device** — kalau drive masih terpasang: lock + dismount di
- `\\.\PhysicalDriveN`, lalu minta PnP manager melepas devnode disk-nya dengan
- `CM_Request_Device_EjectW` (dicari lewat SetupAPI, GUID_DEVINTERFACE_DISK).
- Jadi urutannya sama dengan "Safely Remove Hardware" bawaan Windows.
+   `\\.\PhysicalDriveN`, lalu minta PnP manager melepas devnode disk-nya dengan
+   `CM_Request_Device_EjectW` (dicari lewat SetupAPI, GUID_DEVINTERFACE_DISK).
+   Jadi urutannya sama dengan "Safely Remove Hardware" bawaan Windows.
 
 ## Batasan
 
 - Windows saja.
 - Operasi lock/dismount/eject butuh Administrator.
 - Ikon tray dibuat sendiri dengan `Shell_NotifyIconW` (parent process tidak perlu
- Python tambahan seperti `pystray`/Pillow).
+  Python tambahan seperti `pystray`/Pillow).
 - Antivirus atau Windows Search yang sedang scan bisa menahan drive; tool ini
- tidak menutup proses antivirus (dianggap proses sistem).
+  tidak menutup proses antivirus (dianggap proses sistem).
 - Mode aman melepas handle, tapi tidak bisa **melepas file yang di-map ke memori**
- (memory-mapped file). Ini sering dijumpai pada aplikasi yang sedang jalan dari
- drive itu: `flutter run`/Dart VM, database yang terbuka, atau antivirus yang
- sedang memeriksa file. Untuk kasus itu aplikasinya harus dihentikan dulu
- (mode paksa) — melepas handle saja tidak akan cukup.
+  (memory-mapped file). Ini sering dijumpai pada aplikasi yang sedang jalan dari
+  drive itu: `flutter run`/Dart VM, database yang terbuka, atau antivirus yang
+  sedang memeriksa file. Untuk kasus itu aplikasinya harus dihentikan dulu
+  (mode paksa) — melepas handle saja tidak akan cukup.
 - Mode aman juga tidak bisa menyimpan dokumen aplikasi yang belum di-save; itu
- tetap harus kamu lakukan sendiri sebelum eject.
+  tetap harus kamu lakukan sendiri sebelum eject.
